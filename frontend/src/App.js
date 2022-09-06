@@ -1,26 +1,22 @@
 import './App.css';
-import { Route, Switch } from "react-router-dom";
 import { useState } from 'react';
-import SignIn from './SignIn';
-import LogIn from './LogIn';
+import Menu from './Menu';
+import CreateEmployee from './CreateEmployee';
 
 function App() {
 
-  const [taskComponent, setTask] = useState('login')
+  const [taskComponent, setTask] = useState(<Menu checkTask={checkTask}/>)
   
-  if (taskComponent === "Add"){
-    console.log('conditionall!!!')
-  }
 
   function checkTask(task){
     console.log(task)
-    setTask("Add")
+    setTask(<CreateEmployee />)
   }
 
 
   return (
     <div className="App">
-      <LogIn checkTask={checkTask}/>
+      {taskComponent}
     </div>
   );
 }

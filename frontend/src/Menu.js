@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function LogIn({checkTask}){
+function Menu({checkTask}){
 
   function handleClick(event){
     checkTask('Add')
@@ -17,4 +17,4 @@ function LogIn({checkTask}){
   )
 }
 
-export default LogIn
+export default Menu
