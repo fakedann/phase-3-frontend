@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Menu from './Menu';
 
-function CreateEmployee({setTask, checkTask}){
+function CreateEmployee({switchBack}){
   
   const [formData, setForm] = useState({
     name: '',
@@ -40,7 +40,7 @@ function CreateEmployee({setTask, checkTask}){
     
       }) 
     })
-    setTask(<Menu checkTask={checkTask}/>)
+    switchBack('')
   }
 
   return(
