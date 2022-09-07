@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import Menu from './Menu';
 
-function CreateEmployee(){
+function CreateEmployee({setTask, checkTask}){
   
   const [formData, setForm] = useState({
     name: '',
     dob: '',
-    available: '',
     address: '',
     phone: '',
     position: ''
@@ -25,6 +25,22 @@ function CreateEmployee(){
   function handleSubmit(event){
     event.preventDefault()
     console.log(formData)
+    fetch(`http://localhost:9292/employees`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    })
+    .then( () => {
+      setForm({
+        name: '',
+        dob: '',
+        address: '',
+        phone: '',
+        position: ''
+    
+      }) 
+    })
+    setTask(<Menu checkTask={checkTask}/>)
   }
 
   return(
@@ -37,10 +53,6 @@ function CreateEmployee(){
         <label>
           DOB:
         <input type="text" name="dob" value={formData.dob} onChange={handleChange}/>
-        </label>
-        <label>
-          Days available to work:
-        <input type="text" name="available" value={formData.available} onChange={handleChange}/>
         </label>
         <label>
           Address:

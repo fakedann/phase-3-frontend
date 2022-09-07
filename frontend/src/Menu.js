@@ -3,7 +3,9 @@ import { useState } from 'react';
 function Menu({checkTask}){
 
   function handleClick(event){
-    checkTask('Add')
+    console.log(event.target.id)
+    checkTask(event.target.id)
+    
 
   }
 

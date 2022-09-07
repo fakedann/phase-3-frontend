@@ -10,13 +10,16 @@ function App() {
 
   function checkTask(task){
     console.log(task)
-    setTask(<CreateEmployee />)
+    if( task === "uno"){
+      setTask(<CreateEmployee setTask={setTask}/>)
+    }
+    
   }
 
 
   return (
     <div className="App">
-      {taskComponent}
+      {taskComponent }
     </div>
   );
 }
