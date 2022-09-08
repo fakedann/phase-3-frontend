@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Menu from './Menu';
+
 
 function CreateEmployee({switchBack}){
   
@@ -38,9 +38,10 @@ function CreateEmployee({switchBack}){
         phone: '',
         position: ''
     
-      }) 
+      })
+      switchBack('') 
     })
-    switchBack('')
+    
   }
 
   return(

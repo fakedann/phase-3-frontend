@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import CreateEmployee from './CreateEmployee';
+import SearchEmployee from './SearchEmployee';
 
-function Menu({checkTask}){
+function Menu(){
 
   const [taskComponent, setTask] = useState('')
 
@@ -10,13 +11,16 @@ function Menu({checkTask}){
   }
 
   function handleClick(event){
+
     console.log(event.target.id)
     if(event.target.id === "uno"){
       setTask(<CreateEmployee switchBack={switchBack}/>)
     }else if (event.target.id === "dos"){
+      setTask(<SearchEmployee switchBack={switchBack}/>)
+    } else if ( event.target.id === "tres"){
       fetch("http://localhost:9292/destroy")
       .then((r) => r.json())
-      .then((data) => console.log(data));
+      .then( (data) => console.log(data));
     }
     
 
