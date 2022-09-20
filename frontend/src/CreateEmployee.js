@@ -39,7 +39,7 @@ function CreateEmployee({switchBack}){
         position: ''
     
       })
-      switchBack('') 
+      switchBack() 
     })
     
   }

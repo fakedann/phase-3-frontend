@@ -17,9 +17,9 @@ body {
 
 .mainSection{
   background-color: #f8f9fd;
-  padding-top: 40px;
+  padding-top: 20px;
   width: 350px;
-  height: 320px;
+  height: 390px;
   border-radius: 20px;
 }
 
@@ -79,4 +79,9 @@ input {
   margin-right: 20px;
 }
 
+#infoContainer {
+  padding-top: 50px;
+  text-align: center;
+  margin-bottom: 30px;
+}
 

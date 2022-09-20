@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-function SearchEmployee(){
+function SearchEmployee({switchBack}){
 
   const [search, setSearch] = useState('')
-  const [emplFound, setEmpl] = useState('')
+  const [employeeInfo, setInfo] = useState('')
 
   function handleSubmit(event){
     event.preventDefault()
@@ -13,15 +13,19 @@ function SearchEmployee(){
       .then((r) => r.json())
       .then( (data) => {
         console.log(data)
-        setEmpl(data)
+        if(data !== null){
+          setInfo(<p>Full Name: {data.name}<br></br>  DOB: {data.dob}<br></br> Address: {data.address}.<br></br> Phone: {data.phone}</p>)
+        }else{
+          setInfo('Invalid input. Please, try again.')
+        }
       });
     setSearch('')
 
   }
 
-  // function handleChange(event){
-  //   setSearch(event.target.value)
-  // }
+  function handleClick(event){
+    switchBack()
+  }
 
   return(
     <div className="mainSection">
@@ -33,8 +37,9 @@ function SearchEmployee(){
         <input type="submit" value="Submit" />
      </form>
       <div id="infoContainer">
-        <p>{emplFound}</p>
+        {employeeInfo}
       </div>
+      <button className="btnTask" onClick={handleClick}>Back to Menu</button>
     </div>
   )
 }

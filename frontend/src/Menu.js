@@ -21,8 +21,7 @@ function Menu({switchToMain}){
     } else if ( event.target.id === "tres"){
       setTask(<UpdateEmployee switchBack={switchBack}/>)
     }else if (event.target.id === "cinco"){
-      console.log('here here in 5')
-      switchToMain('')
+      switchToMain()
     }
     
 
