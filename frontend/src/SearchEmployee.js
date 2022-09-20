@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 function SearchEmployee(){
 
-  const [search, setSearch] = useState('') 
+  const [search, setSearch] = useState('')
+  const [emplFound, setEmpl] = useState('')
 
   function handleSubmit(event){
     event.preventDefault()
@@ -10,7 +11,10 @@ function SearchEmployee(){
     console.log(search)
     fetch(`http://localhost:9292/employees/${search}`)
       .then((r) => r.json())
-      .then( (data) => console.log(data));
+      .then( (data) => {
+        console.log(data)
+        setEmpl(data)
+      });
     setSearch('')
 
   }
@@ -28,6 +32,9 @@ function SearchEmployee(){
         </label>
         <input type="submit" value="Submit" />
      </form>
+      <div id="infoContainer">
+        <p>{emplFound}</p>
+      </div>
     </div>
   )
 }
