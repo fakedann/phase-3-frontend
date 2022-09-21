@@ -3,7 +3,11 @@ import { useState } from 'react';
 function UpdateEmployee(){
 
   const [search, setSearch] = useState('')
-  const [change, setChange] = useState('')
+  const [checkedStatus, setChecked] = useState('date')
+
+  function handleChange(e){
+    setChecked(e.target.value)
+  }
 
   function handleSubmit(event){
     event.preventDefault()
@@ -13,7 +17,7 @@ function UpdateEmployee(){
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        body: change,
+        body: 'hola',
       }),
     })
     .then((r) => r.json())
@@ -28,10 +32,14 @@ function UpdateEmployee(){
           Employee's name:
         <input type="text" name="search" value={search} onChange={ event => setSearch(event.target.value)}/>
         </label>
-        <label>
-          desired change:
-        <input type="text" name="change" value={change} onChange={ event => setChange(event.target.value)}/>
-        </label>
+        <label>Date</label>
+        <input type="radio" value="date" onChange={handleChange} checked={checkedStatus === "date"}/>
+        <label>Title</label>
+        <input type="radio" value="title" onChange={handleChange} checked={checkedStatus === "title"}/>
+        <label>Author</label>
+        <input type="radio" value="author" onChange={handleChange} checked={checkedStatus === "author"}/>
+        <label>Publisher</label>
+        <input type="radio" value="publisher" onChange={handleChange} checked={checkedStatus === "publisher"}/>
         <input type="submit" value="Submit" />
      </form>
     </div>

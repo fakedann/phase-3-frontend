@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateEmployee({switchBack}){
   
@@ -11,6 +12,8 @@ function CreateEmployee({switchBack}){
     position: ''
 
   })
+
+  const notify = () => toast("You have succesfully submitted an employee!", {position: toast.POSITION.TOP_CENTER})
 
   function handleChange(event){
     const name = event.target.name;
@@ -39,6 +42,7 @@ function CreateEmployee({switchBack}){
         position: ''
     
       })
+      notify()
       switchBack() 
     })
     
@@ -67,6 +71,7 @@ function CreateEmployee({switchBack}){
           Position:
         <input type="text" name="position" value={formData.position} onChange={handleChange}/>
         </label>
+  
         <input type="submit" value="Submit" />
      </form>
     </div>
