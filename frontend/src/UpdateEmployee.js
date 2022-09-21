@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function UpdateEmployee(){
+function UpdateEmployee({switchBack}){
 
   const [search, setSearch] = useState('')
   const [checkedStatus, setChecked] = useState('name')
   const [change, setChange] = useState('')
+
+  const notify = () => toast("You have succesfully updated an employee's info!", {position: toast.POSITION.TOP_CENTER})
+  const wrong = () => toast("We could not find that employee. Please try again", {position: toast.POSITION.TOP_CENTER})
 
   function handleChange(e){
     setChecked(e.target.value)
@@ -22,8 +27,23 @@ function UpdateEmployee(){
         field: checkedStatus,
       }),
     })
-    .then((r) => r.json())
-    .then( data => console.log(data));
+    .then((r) => {
+      if (!r.ok){
+        throw Error('Could not fetch properly.')
+      }
+      return r.json()
+    })
+    .then( data => {
+      console.log(data)
+      if(data !== null){
+        notify()
+        switchBack()
+      }
+    })
+    .catch( err => {
+      console.log(err)
+      wrong()
+    })
 
   }
 
