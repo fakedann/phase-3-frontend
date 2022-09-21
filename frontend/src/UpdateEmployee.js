@@ -3,7 +3,8 @@ import { useState } from 'react';
 function UpdateEmployee(){
 
   const [search, setSearch] = useState('')
-  const [checkedStatus, setChecked] = useState('date')
+  const [checkedStatus, setChecked] = useState('name')
+  const [change, setChange] = useState('')
 
   function handleChange(e){
     setChecked(e.target.value)
@@ -17,7 +18,8 @@ function UpdateEmployee(){
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        body: 'hola',
+        body: change,
+        field: checkedStatus,
       }),
     })
     .then((r) => r.json())
@@ -26,20 +28,26 @@ function UpdateEmployee(){
   }
 
   return(
-    <div className="mainSection">
+    <div className="updateSection">
       <form onSubmit={handleSubmit}>
-        <label>
+        <p className="advise">Indicate which employee requires a change</p>
+        <label id="emp">
           Employee's name:
         <input type="text" name="search" value={search} onChange={ event => setSearch(event.target.value)}/>
         </label>
-        <label>Date</label>
-        <input type="radio" value="date" onChange={handleChange} checked={checkedStatus === "date"}/>
-        <label>Title</label>
-        <input type="radio" value="title" onChange={handleChange} checked={checkedStatus === "title"}/>
-        <label>Author</label>
-        <input type="radio" value="author" onChange={handleChange} checked={checkedStatus === "author"}/>
-        <label>Publisher</label>
-        <input type="radio" value="publisher" onChange={handleChange} checked={checkedStatus === "publisher"}/>
+        <p className="advise">Select the appropiate field</p>
+        <div className="radio">
+          <label className="radioBtn"><input type="radio" value="name" onChange={handleChange} checked={checkedStatus === "name"}/>
+          Name</label>
+          <label className="radioBtn"><input type="radio" value="dob" onChange={handleChange} checked={checkedStatus === "dob"}/>DOB</label>
+          <label className="radioBtn"><input type="radio" value="address" onChange={handleChange} checked={checkedStatus === "address"}/>Address</label>
+          <label className="radioBtn"><input type="radio" value="phone" onChange={handleChange} checked={checkedStatus === "phone"}/>Phone</label>
+          <label className="radioBtn"><input type="radio" value="position" onChange={handleChange} checked={checkedStatus === "position"}/>Position</label>
+        </div>
+        <label>
+          New input:
+        <input type="text" name="change" value={change} onChange={ event => setChange(event.target.value)}/>
+        </label>
         <input type="submit" value="Submit" />
      </form>
     </div>
