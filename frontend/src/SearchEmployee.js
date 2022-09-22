@@ -7,8 +7,6 @@ function SearchEmployee({switchBack}){
 
   function handleSubmit(event){
     event.preventDefault()
-    console.log('checking submit')
-    console.log(search)
     fetch(`http://localhost:9292/employees/${search}`)
       .then((r) => r.json())
       .then( (data) => {
