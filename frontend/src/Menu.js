@@ -3,7 +3,9 @@ import CreateEmployee from './CreateEmployee';
 import SearchEmployee from './SearchEmployee';
 import UpdateEmployee from './UpdateEmployee';
 
-function Menu({switchToMain}){
+function Menu({switchToMain, restid}){
+
+  console.log(`hello here is the restid ${restid}`)
 
   const [taskComponent, setTask] = useState('')
 
@@ -15,7 +17,7 @@ function Menu({switchToMain}){
 
     console.log(event.target.id)
     if(event.target.id === "uno"){
-      setTask(<CreateEmployee switchBack={switchBack}/>)
+      setTask(<CreateEmployee switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "dos"){
       setTask(<SearchEmployee switchBack={switchBack}/>)
     } else if ( event.target.id === "tres"){

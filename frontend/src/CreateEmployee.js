@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function CreateEmployee({switchBack}){
+function CreateEmployee({switchBack, restid}){
   
   const [formData, setForm] = useState({
     name: '',
     dob: '',
     address: '',
     phone: '',
-    position: ''
+    position: '',
+    restaurant_id: restid
 
   })
 
@@ -39,7 +40,8 @@ function CreateEmployee({switchBack}){
         dob: '',
         address: '',
         phone: '',
-        position: ''
+        position: '',
+        restaurant_id: ''
     
       })
       notify()

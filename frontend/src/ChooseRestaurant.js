@@ -4,7 +4,7 @@ import Menu from './Menu';
 function ChooseRestaurant({switchToMain}){
 
   const [restaurants, setRestaurants] = useState([])
-  const [activateMenu, setMenu] = useState('')
+  const [menuid, setMenu] = useState('')
   
   console.log(restaurants)
 
@@ -17,8 +17,9 @@ function ChooseRestaurant({switchToMain}){
   }, [])
 
   function handleClick(event){
-    console.log(event.target.key)
-    setMenu('4')
+    let result = restaurants.find( restObj => restObj.name === event.target.innerText)
+    console.log(result.id)
+    setMenu(result.id)
    
   }
 
@@ -26,7 +27,7 @@ function ChooseRestaurant({switchToMain}){
 
   return(
     <div className="mainSection">
-      { activateMenu === '' ? restBtns: <Menu switchToMain={switchToMain} />}
+      { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid}/>}
     </div>
   )
 }
