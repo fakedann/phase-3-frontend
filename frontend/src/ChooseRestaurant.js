@@ -26,9 +26,13 @@ function ChooseRestaurant({switchToMain}){
   const restBtns = restaurants.map( restObj => <button key={restObj.id} className="btnTask" onClick={handleClick}>{restObj.name}</button>)
 
   return(
-    <div className="mainSection">
+    // <div className="mainSection">
+    //   { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid}/>}
+    // </div>
+    <div>
       { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid}/>}
     </div>
+    
   )
 }
 

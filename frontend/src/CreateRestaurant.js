@@ -62,7 +62,7 @@ function CreateRestaurant({switchToMain}){
         <input type="text" name="phone" value={formData.phone} onChange={handleChange}/>
         </label>
         <label>
-          Type of food:
+          Food type:
         <input type="text" name="foodType" value={formData.foodType} onChange={handleChange}/>
         </label>
   
