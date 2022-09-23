@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CreateEmployee from './CreateEmployee';
+import RestaurantInfo from './RestaurantInfo';
 import SearchEmployee from './SearchEmployee';
 import UpdateEmployee from './UpdateEmployee';
 
@@ -22,6 +23,8 @@ function Menu({switchToMain, restid}){
       setTask(<SearchEmployee switchBack={switchBack}/>)
     } else if ( event.target.id === "tres"){
       setTask(<UpdateEmployee switchBack={switchBack}/>)
+    }else if (event.target.id === "four"){
+      setTask(<RestaurantInfo switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "cinco"){
       switchToMain()
     }
@@ -32,7 +35,7 @@ function Menu({switchToMain, restid}){
   const menu = <><button className="btnTask" id="uno" onClick={handleClick}>Add Employee</button>
   <button className="btnTask" id="dos" onClick={handleClick}>Employee's Advanced Search</button>
   <button className="btnTask" id="tres" onClick={handleClick}>Make Changes to an Employee</button>
-  <button className="btnTask" id="four">Restaurant's information</button>
+  <button className="btnTask" id="four" onClick={handleClick}>Restaurant's information</button>
   <button className="btnTask" id="cinco" onClick={handleClick}>Back To Main Menu</button>
   </>
 

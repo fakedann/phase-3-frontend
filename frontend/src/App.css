@@ -104,3 +104,8 @@ input {
   height: 450px;
   border-radius: 20px;
 }
+
+.restInfo{
+  text-align: center;
+  font-size: 20px;
+}
