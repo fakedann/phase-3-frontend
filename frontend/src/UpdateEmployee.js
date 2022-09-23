@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function UpdateEmployee({switchBack}){
+function UpdateEmployee({switchBack, restid}){
 
   const [search, setSearch] = useState('')
   const [checkedStatus, setChecked] = useState('name')
@@ -17,7 +17,7 @@ function UpdateEmployee({switchBack}){
 
   function handleSubmit(event){
     event.preventDefault()
-    fetch(`http://localhost:9292/employees/${search}`, {
+    fetch(`http://localhost:9292/employees/${search}/${restid}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -20,9 +20,9 @@ function Menu({switchToMain, restid}){
     if(event.target.id === "uno"){
       setTask(<CreateEmployee switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "dos"){
-      setTask(<SearchEmployee switchBack={switchBack}/>)
+      setTask(<SearchEmployee switchBack={switchBack} restid={restid}/>)
     } else if ( event.target.id === "tres"){
-      setTask(<UpdateEmployee switchBack={switchBack}/>)
+      setTask(<UpdateEmployee switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "four"){
       setTask(<RestaurantInfo switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "cinco"){
@@ -33,7 +33,7 @@ function Menu({switchToMain, restid}){
   }
 
   const menu = <><button className="btnTask" id="uno" onClick={handleClick}>Add Employee</button>
-  <button className="btnTask" id="dos" onClick={handleClick}>Employee's Advanced Search</button>
+  <button className="btnTask" id="dos" onClick={handleClick}>Find an Employee</button>
   <button className="btnTask" id="tres" onClick={handleClick}>Make Changes to an Employee</button>
   <button className="btnTask" id="four" onClick={handleClick}>Restaurant's information</button>
   <button className="btnTask" id="cinco" onClick={handleClick}>Back To Main Menu</button>

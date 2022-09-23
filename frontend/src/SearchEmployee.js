@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-function SearchEmployee({switchBack}){
+function SearchEmployee({switchBack, restid}){
 
   const [search, setSearch] = useState('')
   const [employeeInfo, setInfo] = useState('')
 
   function handleSubmit(event){
     event.preventDefault()
-    fetch(`http://localhost:9292/employees/${search}`)
+    fetch(`http://localhost:9292/employees/${search}/${restid}`)
       .then((r) => r.json())
       .then( (data) => {
         console.log(data)
