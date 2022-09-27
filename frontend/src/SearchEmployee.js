@@ -14,7 +14,7 @@ function SearchEmployee({switchBack, restid}){
         if(data !== null){
           setInfo(<p>Full Name: {data.name}<br></br>  DOB: {data.dob}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Position: {data.position}</p>)
         }else{
-          setInfo('Invalid input. Please, try again.')
+          setInfo('We could not find that employee. Please, try again.')
         }
       });
     setSearch('')
