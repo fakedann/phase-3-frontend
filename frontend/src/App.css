@@ -16,10 +16,12 @@ body {
 }
 
 .mainSection{
+  /* display: flex;
+  flex-direction: column; */
   background-color: #f8f9fd;
   padding-top: 20px;
   width: 350px;
-  height: 390px;
+  height: auto;
   border-radius: 20px;
 }
 
@@ -111,5 +113,5 @@ input {
 }
 
 .mainMenu{
-  margin-top: 100px;
+  margin-top: 30px;
 }
