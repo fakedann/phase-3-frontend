@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Menu from './Menu';
 
-function ChooseRestaurant({switchToMain}){
+function ChooseRestaurant({switchToMain, setTitle}){
 
   const [restaurants, setRestaurants] = useState([])
   const [menuid, setMenu] = useState('')
@@ -18,6 +18,7 @@ function ChooseRestaurant({switchToMain}){
 
   function handleClick(event){
     let result = restaurants.find( restObj => restObj.name === event.target.innerText)
+    setTitle(event.target.innerText)
     console.log(result.id)
     setMenu(result.id)
    
@@ -26,11 +27,8 @@ function ChooseRestaurant({switchToMain}){
   const restBtns = restaurants.map( restObj => <button key={restObj.id} className="btnTask" onClick={handleClick}>{restObj.name}</button>)
 
   return(
-    // <div className="mainSection">
-    //   { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid}/>}
-    // </div>
     <div>
-      { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid}/>}
+      { menuid === '' ? restBtns: <Menu switchToMain={switchToMain} restid={menuid} setTitle={setTitle}/>}
     </div>
     
   )

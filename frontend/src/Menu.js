@@ -4,7 +4,7 @@ import RestaurantInfo from './RestaurantInfo';
 import SearchEmployee from './SearchEmployee';
 import UpdateEmployee from './UpdateEmployee';
 
-function Menu({switchToMain, restid}){
+function Menu({switchToMain, restid, setTitle}){
 
   console.log(`hello here is the restid ${restid}`)
 
@@ -26,6 +26,7 @@ function Menu({switchToMain, restid}){
     }else if (event.target.id === "four"){
       setTask(<RestaurantInfo switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "cinco"){
+      setTitle('')
       switchToMain()
     }
     

@@ -8,10 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
+  const [title, setTitle] = useState('')
+
 
   return (
     <div className="App">
-      <RestaurantMenu />
+      {title === '' ? '': <h2>You are currently working with {title}</h2>}
+      <RestaurantMenu setTitle={setTitle}/>
       <ToastContainer />
     </div>
   );

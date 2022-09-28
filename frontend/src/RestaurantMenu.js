@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ChooseRestaurant from './ChooseRestaurant';
 import CreateRestaurant from './CreateRestaurant';
 
-function RestaurantMenu(){
+function RestaurantMenu({setTitle}){
 
   const [taskComponent, setTask] = useState('')
 
@@ -15,7 +15,7 @@ function RestaurantMenu(){
     if(event.target.id === "uno"){
       setTask(<CreateRestaurant switchToMain={switchToMain} />)
     }else if (event.target.id === "dos"){
-      setTask(<ChooseRestaurant switchToMain={switchToMain} />)
+      setTask(<ChooseRestaurant switchToMain={switchToMain} setTitle={setTitle} />)
     }
   }
 
