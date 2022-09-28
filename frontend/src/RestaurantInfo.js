@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function RestaurantInfo({switchBack, restid}){
 
   const [restInfo, setRest] = useState('')
   const [listEmployees, setEmployees] = useState([])
   const [expandOrCollapse, setExpandOrCollapse] = useState('collapse')
-  console.log(listEmployees)
-  console.log('otra vez')
+
+  const borrar = () => toast("The employee you selected has been fired and deleted from your records.", {position: toast.POSITION.TOP_CENTER})
+
 
   const displayedEmployees = listEmployees.map( emplObj => <p key={emplObj.id} id={emplObj.id}>Full Name: {emplObj.name}<br></br>  DOB: {emplObj.dob}<br></br> Address: {emplObj.address}<br></br> Phone: {emplObj.phone}<br></br> Position: {emplObj.position}<br></br> <button onClick={handleDelete}>Fire Employee</button></p>)
 
@@ -15,10 +18,9 @@ function RestaurantInfo({switchBack, restid}){
     fetch(`http://localhost:9292/restaurant/${restid}`)
       .then((r) => r.json())
       .then( (data) => {
-        console.log(data)
-        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}<br></br> Employee count: {listEmployees.length}</p>)
+        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}<br></br> Employee count: {data.employee_count}</p>)
       });
-  }, [])
+  }, [listEmployees])
 
   function handleClick(event){
     switchBack()
@@ -30,11 +32,11 @@ function RestaurantInfo({switchBack, restid}){
       method: 'DELETE',
       })
     .then(res => res.json()) // or res.json()
-    .then(res => console.log(res))
+    .then(res => {
+      borrar()
+      setEmployees(res)
+    })
 
-    fetch(`http://localhost:9292/restaurant/${restid}/employees`)
-      .then((r) => r.json())
-      .then( (data) => setEmployees(data));
   }
 
   function handleEmployees(){
