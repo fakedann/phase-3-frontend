@@ -6,8 +6,9 @@ function RestaurantInfo({switchBack, restid}){
   const [listEmployees, setEmployees] = useState([])
   const [expandOrCollapse, setExpandOrCollapse] = useState('collapse')
   console.log(listEmployees)
+  console.log('otra vez')
 
-  const displayedEmployees = listEmployees.map( emplObj => <p key={emplObj.id}>Full Name: {emplObj.name}<br></br>  DOB: {emplObj.dob}<br></br> Address: {emplObj.address}<br></br> Phone: {emplObj.phone}<br></br> Position: {emplObj.position}</p>)
+  const displayedEmployees = listEmployees.map( emplObj => <p key={emplObj.id} id={emplObj.id}>Full Name: {emplObj.name}<br></br>  DOB: {emplObj.dob}<br></br> Address: {emplObj.address}<br></br> Phone: {emplObj.phone}<br></br> Position: {emplObj.position}<br></br> <button onClick={handleDelete}>Fire Employee</button></p>)
 
   
   useEffect(() => {
@@ -15,12 +16,25 @@ function RestaurantInfo({switchBack, restid}){
       .then((r) => r.json())
       .then( (data) => {
         console.log(data)
-        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}<br></br> Employee count: {data.employee_count}</p>)
+        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}<br></br> Employee count: {listEmployees.length}</p>)
       });
   }, [])
 
   function handleClick(event){
     switchBack()
+  }
+
+  function handleDelete(event){
+    console.log(event.target.parentNode.id)
+    fetch(`http://localhost:9292/employees/${event.target.parentNode.id}/${restid}`, {
+      method: 'DELETE',
+      })
+    .then(res => res.json()) // or res.json()
+    .then(res => console.log(res))
+
+    fetch(`http://localhost:9292/restaurant/${restid}/employees`)
+      .then((r) => r.json())
+      .then( (data) => setEmployees(data));
   }
 
   function handleEmployees(){
