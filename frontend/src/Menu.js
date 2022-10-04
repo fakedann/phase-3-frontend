@@ -6,7 +6,6 @@ import UpdateEmployee from './UpdateEmployee';
 
 function Menu({switchToMain, restid, setTitle}){
 
-  console.log(`hello here is the restid ${restid}`)
 
   const [taskComponent, setTask] = useState('')
 
@@ -16,7 +15,6 @@ function Menu({switchToMain, restid, setTitle}){
 
   function handleClick(event){
 
-    console.log(event.target.id)
     if(event.target.id === "uno"){
       setTask(<CreateEmployee switchBack={switchBack} restid={restid}/>)
     }else if (event.target.id === "dos"){

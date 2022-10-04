@@ -47,6 +47,10 @@ function UpdateEmployee({switchBack, restid}){
 
   }
 
+  function handleClick(){
+    switchBack()
+  }
+
   return(
     <div className="updateSection">
       <form onSubmit={handleSubmit}>
@@ -70,6 +74,7 @@ function UpdateEmployee({switchBack, restid}){
         </label>
         <input type="submit" value="Submit" />
      </form>
+     <button id="addBtn" className="btnTask" onClick={handleClick}>Back to Menu</button>
     </div>
   )
 }

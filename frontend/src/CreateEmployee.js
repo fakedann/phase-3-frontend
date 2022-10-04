@@ -50,6 +50,10 @@ function CreateEmployee({switchBack, restid}){
     
   }
 
+  function handleClick(){
+    switchBack()
+  }
+
   return(
     <div className="mainSection">
       <form onSubmit={handleSubmit}>
@@ -76,6 +80,7 @@ function CreateEmployee({switchBack, restid}){
   
         <input type="submit" value="Submit" />
      </form>
+     <button id="addBtn" className="btnTask" onClick={handleClick}>Back to Menu</button>
     </div>
     
   )
