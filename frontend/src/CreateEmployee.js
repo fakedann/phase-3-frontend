@@ -15,6 +15,7 @@ function CreateEmployee({switchBack, restid}){
   })
 
   const notify = () => toast("You have succesfully submitted an employee!", {position: toast.POSITION.TOP_CENTER})
+  const notvalid = () => toast("One of your fields has at least one invalid character. Please, try again.", {position: toast.POSITION.TOP_CENTER})
 
   function handleChange(event){
     const name = event.target.name;
@@ -26,8 +27,26 @@ function CreateEmployee({switchBack, restid}){
     });
   }
 
-  function handleSubmit(event){
+  function checkSubmit(event){
     event.preventDefault()
+    const letters = /^[A-Za-z ]+$/
+    const date = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
+    const address = /^[a-zA-Z 0-9_.-]*$/
+    const phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
+    const positions = ['server', 'host', 'cook', 'manager']
+
+    if(letters.test(formData.name) && address.test(formData.address) && phone.test(formData.phone) && date.test(formData.dob) && positions.find( element => element === formData.position)){
+      console.log('valid input')
+      handleSubmit()
+    }else{
+      console.log('nope')
+      notvalid()
+    }
+
+  }
+
+  function handleSubmit(){
+    // event.preventDefault()
     console.log(formData)
     fetch(`http://localhost:9292/employees`, {
       method: "POST",
@@ -56,13 +75,14 @@ function CreateEmployee({switchBack, restid}){
 
   return(
     <div className="mainSection">
-      <form onSubmit={handleSubmit}>
+      <p id="note">Note: special characters are not allowed on any field. The only accepted inputs for the "position" input are: server, host, cook, or manager.</p>
+      <form onSubmit={checkSubmit}>
         <label>
           Full name:
         <input type="text" name="name" value={formData.name} onChange={handleChange}/>
         </label>
         <label>
-          DOB:
+          DOB(DD/MM/YYYY):
         <input type="text" name="dob" value={formData.dob} onChange={handleChange}/>
         </label>
         <label>

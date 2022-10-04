@@ -119,3 +119,9 @@ input {
 #addBtn {
   margin-top: 20px;
 }
+
+#note{
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
