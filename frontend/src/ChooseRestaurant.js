@@ -5,8 +5,6 @@ function ChooseRestaurant({switchToMain, setTitle}){
 
   const [restaurants, setRestaurants] = useState([])
   const [menuid, setMenu] = useState('')
-  
-  console.log(restaurants)
 
   useEffect(() => {
     fetch(`http://localhost:9292/restaurants`)
@@ -22,6 +20,10 @@ function ChooseRestaurant({switchToMain, setTitle}){
     console.log(result.id)
     setMenu(result.id)
    
+  }
+
+  function goBack(event){
+    switchToMain()
   }
 
   const restBtns = restaurants.map( restObj => <button key={restObj.id} className="btnTask" onClick={handleClick}>{restObj.name}</button>)

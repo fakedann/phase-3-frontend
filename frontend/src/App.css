@@ -125,3 +125,7 @@ input {
   font-weight: bold;
   font-size: 18px;
 }
+
+#newRest {
+  margin-top: 20px;
+}

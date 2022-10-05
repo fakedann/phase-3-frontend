@@ -62,6 +62,10 @@ function CreateRestaurant({switchToMain}){
     
   }
 
+  function handleClick(event){
+    switchToMain()
+  }
+
   return(
     <div className="mainSection">
       <p id="note">Note: special characters are not allowed on any field.</p>
@@ -85,6 +89,7 @@ function CreateRestaurant({switchToMain}){
   
         <input type="submit" value="Submit" />
      </form>
+     <button id="newRest" className="btnTask" onClick={handleClick}>Back to Menu</button>
     </div>
     
   )

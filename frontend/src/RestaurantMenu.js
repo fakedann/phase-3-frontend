@@ -19,6 +19,7 @@ function RestaurantMenu({setTitle}){
     }
   }
 
+
   const menu =  <div className="mainMenu"><button className="btnTask" id="uno" onClick={handleClick}>Establish a New Restaurant</button>
   <button className="btnTask" id="dos" onClick={handleClick}>Manage a Restaurant</button></div>
 
