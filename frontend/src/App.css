@@ -103,7 +103,7 @@ input {
 .updateSection{
   background-color: #f8f9fd;
   width: 350px;
-  height: 450px;
+  height: auto;
   border-radius: 20px;
 }
 
