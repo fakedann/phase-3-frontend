@@ -22,10 +22,6 @@ function ChooseRestaurant({switchToMain, setTitle}){
    
   }
 
-  function goBack(event){
-    switchToMain()
-  }
-
   const restBtns = restaurants.map( restObj => <button key={restObj.id} className="btnTask" onClick={handleClick}>{restObj.name}</button>)
 
   return(
