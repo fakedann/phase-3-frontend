@@ -10,7 +10,6 @@ function RestaurantInfo({switchBack, restid}){
 
   const borrar = () => toast("The employee you selected has been fired and deleted from your records.", {position: toast.POSITION.TOP_CENTER})
 
-
   const displayedEmployees = listEmployees.map( emplObj => <p key={emplObj.id} id={emplObj.id}>Full Name: {emplObj.name}<br></br>  DOB: {emplObj.dob}<br></br> Address: {emplObj.address}<br></br> Phone: {emplObj.phone}<br></br> Position: {emplObj.position}<br></br> <button onClick={handleDelete}>Fire Employee</button></p>)
 
   
@@ -18,23 +17,27 @@ function RestaurantInfo({switchBack, restid}){
     fetch(`http://localhost:9292/restaurant/${restid}`)
       .then((r) => r.json())
       .then( (data) => {
-        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}<br></br> Employee count: {data.employee_count}</p>)
+        console.log(data.employees)
+        setEmployees(data.employees)
+        setRest(<p>Restaurant's Name: {data.name}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Food type: {data.type_of_food}</p>)
       });
-  }, [listEmployees])
+  }, [])
 
   function handleClick(event){
     switchBack()
   }
 
   function handleDelete(event){
-    console.log(event.target.parentNode.id)
-    fetch(`http://localhost:9292/employees/${event.target.parentNode.id}/${restid}`, {
+   
+    fetch(`http://localhost:9292/employees/${event.target.parentNode.id}`, {
       method: 'DELETE',
       })
     .then(res => res.json()) // or res.json()
     .then(res => {
+      // const newEmployees = listEmployees.filter( emplObj => emplObj.id !== Number(event.target.parentNode.id))
+      setEmployees(listEmployees.filter( emplObj => emplObj.id !== Number(event.target.parentNode.id)))
       borrar()
-      setEmployees(res)
+      
     })
 
   }
@@ -45,15 +48,8 @@ function RestaurantInfo({switchBack, restid}){
     if(expandOrCollapse === 'expand'){
       setExpandOrCollapse('collapse')
     }else{
-      fetch(`http://localhost:9292/restaurant/${restid}/employees`)
-      .then((r) => r.json())
-      .then( (data) => {
-        console.log(data[0])
-          setEmployees(data)
-          setExpandOrCollapse('expand')
-      });
+      setExpandOrCollapse('expand')
     }
-  
     
   }
 
@@ -61,6 +57,7 @@ function RestaurantInfo({switchBack, restid}){
     <div className="mainSection">
       <div className="restInfo">
         {restInfo}
+        {<p>Employee count: {listEmployees.length}</p>}
         {expandOrCollapse === 'collapse' ? '': <h2>LIST OF EMPLOYEES</h2>}
         { expandOrCollapse === 'collapse' ? '': displayedEmployees}
       </div>
