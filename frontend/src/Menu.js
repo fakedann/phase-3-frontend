@@ -4,8 +4,7 @@ import RestaurantInfo from './RestaurantInfo';
 import SearchEmployee from './SearchEmployee';
 import UpdateEmployee from './UpdateEmployee';
 
-function Menu({switchToMain, restid, setTitle}){
-
+function Menu({switchToMain, rest, setTitle, updateRest}){
 
   const [taskComponent, setTask] = useState('')
 
@@ -13,16 +12,17 @@ function Menu({switchToMain, restid, setTitle}){
     setTask('')
   }
 
+
   function handleClick(event){
 
     if(event.target.id === "uno"){
-      setTask(<CreateEmployee switchBack={switchBack} restid={restid}/>)
+      setTask(<CreateEmployee switchBack={switchBack} restid={rest.id} updateRest={updateRest}/>)
     }else if (event.target.id === "dos"){
-      setTask(<SearchEmployee switchBack={switchBack} restid={restid}/>)
+      setTask(<SearchEmployee switchBack={switchBack} rest={rest} updateRest={updateRest}/>)
     } else if ( event.target.id === "tres"){
-      setTask(<UpdateEmployee switchBack={switchBack} restid={restid}/>)
+      setTask(<UpdateEmployee switchBack={switchBack} restid={rest.id} updateRest={updateRest}/>)
     }else if (event.target.id === "four"){
-      setTask(<RestaurantInfo switchBack={switchBack} restid={restid}/>)
+      setTask(<RestaurantInfo switchBack={switchBack} rest={rest} updateRest={updateRest}/>)
     }else if (event.target.id === "cinco"){
       setTitle('')
       switchToMain()

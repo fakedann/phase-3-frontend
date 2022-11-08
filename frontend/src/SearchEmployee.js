@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SearchEmployee({switchBack, restid}){
+function SearchEmployee({switchBack, rest, updateRest}){
 
   const [search, setSearch] = useState('')
   const [employeeInfo, setInfo] = useState('')
@@ -11,17 +11,12 @@ function SearchEmployee({switchBack, restid}){
 
   function handleSubmit(event){
     event.preventDefault()
-    fetch(`http://localhost:9292/employees/${search}/${restid}`)
-      .then((r) => r.json())
-      .then( (data) => {
-        console.log(data)
-        if(data !== null){
-          setInfo(<p>Full Name: {data.name}<br></br>  DOB: {data.dob}<br></br> Address: {data.address}<br></br> Phone: {data.phone}<br></br> Position: {data.position}<br></br><button id={data.id} onClick={handleDelete}>Fire Employee</button></p>)
-        }else{
-          setInfo('We could not find that employee. Please, try again.')
-        }
-      });
-    setSearch('')
+    let found = rest.employees.find( empObj => empObj.name === search)
+    if (found !== undefined){
+      setInfo(<p>Full Name: {found.name}<br></br>  DOB: {found.dob}<br></br> Address: {found.address}<br></br> Phone: {found.phone}<br></br> Position: {found.position}<br></br><button id={found.id} onClick={handleDelete}>Fire Employee</button></p>)
+    }else{
+      setInfo(<p>The employee you have searched for does no exist. Please, try something different.</p>)
+    }
 
   }
 
@@ -30,14 +25,16 @@ function SearchEmployee({switchBack, restid}){
   }
 
   function handleDelete(event){
-    console.log(event.target)
-    fetch(`http://localhost:9292/employees/${event.target.id}/${restid}`, {
+    
+    fetch(`http://localhost:9292/employees/${event.target.id}`, {
       method: 'DELETE',
       })
     .then(res => res.json())
     .then(res => {
+      updateRest("delete", 0, Number(event.target.id))
       borrar()
       setInfo('')
+      switchBack()
     })
 
   }

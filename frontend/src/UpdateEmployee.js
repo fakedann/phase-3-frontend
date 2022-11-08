@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function UpdateEmployee({switchBack, restid}){
+function UpdateEmployee({switchBack, restid, updateRest}){
 
   const [search, setSearch] = useState('')
   const [checkedStatus, setChecked] = useState('name')
@@ -41,8 +41,7 @@ function UpdateEmployee({switchBack, restid}){
   }
 
   function handleSubmit(){
-    // event.preventDefault()
-    fetch(`http://localhost:9292/employees/${search}/${restid}`, {
+    fetch(`http://localhost:9292/employees/${search}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -50,6 +49,7 @@ function UpdateEmployee({switchBack, restid}){
       body: JSON.stringify({
         body: change,
         field: checkedStatus,
+        restid: restid,
       }),
     })
     .then((r) => {
@@ -59,8 +59,8 @@ function UpdateEmployee({switchBack, restid}){
       return r.json()
     })
     .then( data => {
-      console.log(data)
       if(data !== null){
+        updateRest('update', data)
         notify()
         switchBack()
       }

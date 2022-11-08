@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function CreateEmployee({switchBack, restid}){
+function CreateEmployee({switchBack, restid, updateRest}){
   
   const [formData, setForm] = useState({
     name: '',
@@ -36,24 +36,24 @@ function CreateEmployee({switchBack, restid}){
     const positions = ['server', 'host', 'cook', 'manager']
 
     if(letters.test(formData.name) && address.test(formData.address) && phone.test(formData.phone) && date.test(formData.dob) && positions.find( element => element === formData.position)){
-      console.log('valid input')
+      
       handleSubmit()
     }else{
-      console.log('nope')
+      
       notvalid()
     }
 
   }
 
   function handleSubmit(){
-    // event.preventDefault()
-    console.log(formData)
     fetch(`http://localhost:9292/employees`, {
       method: "POST",
       headers: {"Content-Type": "application/json" },
       body: JSON.stringify(formData)
     })
-    .then( () => {
+    .then(res => res.json())
+    .then( res => {
+      updateRest("add", res)
       setForm({
         name: '',
         dob: '',
